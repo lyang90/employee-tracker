@@ -99,7 +99,7 @@ function addDepartment() {
 
     ])
         .then(({ departmentName }) => {
-            pool.query("INSERT INTO department (department_name) VALUES ($1)", [departmentName])
+            pool.query("INSERT INTO department (name) VALUES ($1)", [departmentName])
                 .then(() => {
                     console.log('Department was added.');
                 })
@@ -116,7 +116,7 @@ function addRole() {
 
     ])
         .then(({ roleName }) => {
-            pool.query("INSERT INTO role (role_name) VALUES ($1)", [roleName])
+            pool.query("INSERT INTO role (title) VALUES ($1)", [roleName])
                 .then(() => {
                     console.log('Role was added.');
                 })
@@ -128,13 +128,18 @@ function addRole() {
 function addEmployee() {
     inquirer.prompt([
         {
-            message: 'What is the name of the employee you would like to add?',
-            name: 'employeeName'
+            message: 'What is the first name of the employee you would like to add?',
+            name: 'firstName',
+
+            message: 'What is last name of the employee you would like to add?',
+            name: 'lastName',
+
+
         }
 
     ])
-        .then(({ employeeName }) => {
-            pool.query("INSERT INTO employee (employee_name) VALUES ($1)", [employeeName])
+        .then(({ firstName, lastName }) => {
+            pool.query("INSERT INTO employee (first_name, last_name) VALUES ($1, $2)", [firstName, lastName])
                 .then(() => {
                     console.log('Employee was added.');
                 })
@@ -150,7 +155,7 @@ function updateRole(employee_id) {
         }
 
     ])
-        .then(({ employeeRole }) => { // TODO: FIX this query
+        .then(({ employeeRole }) => {
             pool.query("UPDATE employee SET role_id= $1 WHERE id = $2", [employeeRole, employee_id])
                 .then(() => {
                     console.log('Employee information was added.');
