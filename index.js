@@ -69,7 +69,7 @@ function main() {
 function viewAllemployees() {
     pool.query("SELECT * FROM employee")
         .then(({ rows }) => {
-            console.log(rows);
+            console.table(rows);
             main();
         })
 }
@@ -77,7 +77,7 @@ function viewAllemployees() {
 function viewAllRoles() {
     pool.query("SELECT * FROM role")
         .then(({ rows }) => {
-            console.log(rows);
+            console.table(rows);
             main();
         })
 }
@@ -85,7 +85,7 @@ function viewAllRoles() {
 function viewAllDepartments() {
     pool.query("SELECT * FROM department")
         .then(({ rows }) => {
-            console.log(rows);
+            console.table(rows);
             main();
         })
 }
